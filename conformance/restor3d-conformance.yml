@@ -1,0 +1,86 @@
+generated: '2026-08-26'
+method: probed
+source: >-
+  The two OAuth metadata documents restor3d serves at /.well-known/ (both HTTP 200, 2026-08-26)
+  and the WordPress REST index at https://www.restor3d.com/wp-json/ (HTTP 200). No compliance,
+  certification or standards claims appear anywhere on www.restor3d.com; the site has no trust
+  centre, no security page and no developer documentation.
+api: restor3d Website Content API (WordPress REST + MCP)
+conformance:
+- id: oauth2
+  name: OAuth 2.0 (RFC 6749)
+  conforms: true
+  evidence: >-
+    /.well-known/oauth-authorization-server publishes issuer, authorization_endpoint,
+    token_endpoint, revocation_endpoint, response_types_supported [code] and grant_types_supported
+    [authorization_code, refresh_token].
+- id: rfc8414
+  name: OAuth 2.0 Authorization Server Metadata (RFC 8414)
+  conforms: true
+  evidence: >-
+    A conformant metadata document is served at the RFC 8414 well-known path
+    https://www.restor3d.com/.well-known/oauth-authorization-server (HTTP 200, application/json).
+- id: rfc9728
+  name: OAuth 2.0 Protected Resource Metadata (RFC 9728)
+  conforms: true
+  evidence: >-
+    https://www.restor3d.com/.well-known/oauth-protected-resource (HTTP 200) returns
+    resource, authorization_servers[], bearer_methods_supported[header] and scopes_supported[mcp].
+- id: pkce
+  name: PKCE (RFC 7636)
+  conforms: true
+  evidence: 'code_challenge_methods_supported: [S256] in the authorization server metadata.'
+- id: rfc6750
+  name: OAuth 2.0 Bearer Token Usage (RFC 6750)
+  conforms: true
+  evidence: 'bearer_methods_supported: [header] in the protected resource metadata.'
+- id: mcp
+  name: Model Context Protocol
+  conforms: true
+  evidence: >-
+    https://www.restor3d.com/wp-json/mcp/mcp-oauth-server answers a JSON-RPC 2.0 tools/list POST
+    with a structured MCP error (HTTP 401, code mcp_unauthorized) rather than a 404, and the
+    protected-resource document names it as an MCP resource.
+- id: oidc
+  name: OpenID Connect Discovery
+  conforms: false
+  evidence: https://www.restor3d.com/.well-known/openid-configuration returns HTTP 404.
+- id: rfc9457
+  name: Problem Details for HTTP APIs (RFC 9457)
+  conforms: false
+  evidence: >-
+    Error bodies use the WordPress REST envelope {code, message, data:{status}} with content-type
+    application/json, not application/problem+json.
+- id: rfc9116
+  name: security.txt (RFC 9116)
+  conforms: false
+  evidence: https://www.restor3d.com/.well-known/security.txt returns HTTP 404.
+- id: api_catalog
+  name: RFC 9727 api-catalog
+  conforms: false
+  evidence: https://www.restor3d.com/.well-known/api-catalog returns HTTP 404.
+- id: a2a
+  name: A2A Agent Card
+  conforms: false
+  evidence: >-
+    /.well-known/agent-card.json and /.well-known/agent.json both return HTTP 404 on
+    www.restor3d.com. No agent card artifact was written.
+domain_standards:
+  assessed: true
+  declared: none
+  note: >-
+    restor3d's market is orthopaedic medical devices, where the relevant interoperability
+    standards would be HL7 v2 / FHIR (clinical exchange), DICOM (the CT/MRI imaging that
+    patient-matched implant design consumes), GS1/FDA UDI (device identification) and X12 837/278
+    for claims and prior authorisation. NONE of these is declared anywhere in a restor3d contract
+    or on its website, because restor3d publishes no clinical, imaging or ordering API at all -
+    only a WordPress content surface, which has no domain standard to conform to. Recorded as
+    assessed-and-absent rather than left blank; nothing is invented to fill the slot.
+compliance_certifications:
+  found: []
+  note: >-
+    No SOC 2, ISO 27001, ISO 13485, HIPAA, FedRAMP or PCI claim is published on www.restor3d.com,
+    and no trust centre exists (trust.restor3d.com does not resolve). restor3d is an FDA-regulated
+    device manufacturer with 510(k) clearances on file at accessdata.fda.gov, but that is device
+    clearance, not an information-security compliance programme, and no `Compliance` pointer is
+    emitted on the strength of it.

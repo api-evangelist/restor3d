@@ -1,0 +1,64 @@
+generated: '2026-08-26'
+method: probed
+source: >-
+  https://www.restor3d.com/.well-known/oauth-protected-resource (200) named the resource, and a
+  direct POST of {"jsonrpc":"2.0","id":1,"method":"tools/list"} to
+  https://www.restor3d.com/wp-json/mcp/mcp-oauth-server returned HTTP 401
+  {"code":"mcp_unauthorized","message":"MCP authentication required."} on 2026-08-26 - a live,
+  auth-gated MCP endpoint rather than a 404.
+name: restor3d Website MCP Server
+status: live
+scope_warning: >-
+  READ THIS BEFORE TREATING THIS AS A PRODUCT SURFACE. This MCP server is mounted by the WordPress
+  MCP Adapter / Abilities API plugin stack running restor3d's corporate marketing website. It
+  exposes site content (pages, posts, events, resources, procedures, product families) to an agent.
+  It is NOT an implant-design, ordering, case-planning, clinical or device API, and restor3d
+  publishes no such API. It was found by probing, not advertised in any restor3d documentation.
+deployment:
+  mode: remote
+  endpoint: https://www.restor3d.com/wp-json/mcp/mcp-oauth-server
+  auth: oauth
+  verified: probed
+servers:
+- id: mcp-oauth-server
+  endpoint: https://www.restor3d.com/wp-json/mcp/mcp-oauth-server
+  methods:
+  - POST
+  - GET
+  - DELETE
+  auth: oauth
+  probe:
+    method: tools/list
+    http_status: 401
+    body: '{"code":"mcp_unauthorized","message":"MCP authentication required.","data":{"status":401}}'
+    checked: '2026-08-26'
+- id: mcp-adapter-default-server
+  endpoint: https://www.restor3d.com/wp-json/mcp/mcp-adapter-default-server
+  methods:
+  - POST
+  - GET
+  - DELETE
+  auth: wordpress-cookie-or-application-password
+  probe:
+    method: tools/list
+    http_status: 401
+    body: '{"code":"rest_forbidden","message":"Sorry, you are not allowed to do that.","data":{"status":401}}'
+    checked: '2026-08-26'
+authorization:
+  authorization_server: https://www.restor3d.com
+  metadata: well-known/restor3d-oauth-authorization-server.json
+  protected_resource_metadata: well-known/restor3d-oauth-protected-resource.json
+  scopes:
+  - mcp
+  pkce: S256
+  dynamic_client_registration: client_id_metadata_document
+tools:
+  status: unavailable
+  reason: >-
+    tools/list is OAuth-gated (401). No llms.txt, no docs page and no published tool list exists to
+    fall back to, so the real tool set and its inputSchemas require authenticated introspection.
+    NOTHING IS DERIVED HERE - no candidate tools are listed, because inventing them would assert
+    capabilities restor3d has never published.
+related:
+  wordpress_rest_index: https://www.restor3d.com/wp-json/
+  abilities_api: https://www.restor3d.com/wp-json/wp-abilities/v1/abilities

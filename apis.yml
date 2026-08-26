@@ -1,18 +1,61 @@
 aid: restor3d
 name: restor3d
-description: 'restor3d is a company surfaced via the API Evangelist harvest backlog (source: secondary-market)
-  and added to the network as a stub for full-pipeline profiling.'
+description: >-
+  restor3d is a Durham, North Carolina medical device manufacturer, founded in 2017 as a Duke
+  University spinout, that designs and 3D-prints personalized musculoskeletal implants and the
+  single-use instrumentation that goes with them. The company unites additive manufacturing of
+  osseointegrative titanium and cobalt-chrome lattices, biomechanics research, and AI-driven
+  planning and design-automation software to produce patient-matched total ankle, total knee,
+  total hip and shoulder reconstruction systems, plus foot-and-ankle and spine fixation devices.
+  Manufacturing and design are vertically integrated in-house, and the company sponsors device
+  performance research at Duke. restor3d is a regulated device maker rather than a software
+  vendor - it publishes no developer portal, no product or clinical API, no SDKs and no public
+  OpenAPI. The only machine-readable surface it serves is its own corporate WordPress site,
+  which exposes the standard WordPress REST API and an OAuth-protected Model Context Protocol
+  endpoint over site content.
+image: https://www.restor3d.com/wp-content/uploads/2024/12/Main-Brand-Logo.svg
 url: https://raw.githubusercontent.com/api-evangelist/restor3d/refs/heads/main/apis.yml
 x-type: company
 x-source: harvest:secondary-market
-x-tier: stub
-x-tier-reason: harvest
+x-tier: profiled
+x-tier-reason: enrichment-pass
 specificationVersion: '0.20'
 created: '2026-08-26'
 modified: '2026-08-26'
 tags:
+- Medical Devices
+- Health
+- Orthopedics
+- 3D Printing
+- Additive Manufacturing
+- Implants
+- Surgery
+- Artificial Intelligence
+- Manufacturing
 - Company
-apis: []
+apis:
+- name: restor3d Website Content API (WordPress REST + MCP)
+  description: >-
+    The machine-readable surface served by restor3d's corporate website. It is a stock WordPress
+    REST API (namespaces wp/v2, wp-abilities/v1, mcp, plus SEO/caching plugin namespaces) covering
+    site content types - pages, posts, events, resources, procedures, product families and product
+    categories - together with a Model Context Protocol server mounted at /wp-json/mcp. This is
+    the content surface of a marketing site, NOT a product, clinical, implant-design or ordering
+    API; restor3d publishes no such API. Read routes are anonymous; every write route and both MCP
+    servers require authentication.
+  humanURL: https://www.restor3d.com/
+  baseURL: https://www.restor3d.com/wp-json
+  tags:
+  - Content
+  - CMS
+  - MCP
+  properties:
+  - type: MCPServer
+    url: mcp/restor3d-mcp.yml
+  - type: Authentication
+    url: authentication/restor3d-authentication.yml
+  - type: OAuthScopes
+    url: scopes/restor3d-scopes.yml
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
@@ -20,4 +63,39 @@ maintainers:
   email: info@apis.io
 common:
 - type: Website
-  url: https://forgeglobal.com/restor3d_stock/
+  url: https://www.restor3d.com/
+- type: Support
+  url: https://www.restor3d.com/contact-us/
+- type: Blog
+  url: https://www.restor3d.com/news-press/
+- type: BlogRSS
+  url: https://www.restor3d.com/feed/
+- type: GitHubOrganization
+  url: https://github.com/restor3d
+- type: TermsOfService
+  url: https://www.restor3d.com/terms-and-conditions/
+- type: PrivacyPolicy
+  url: https://www.restor3d.com/privacy-policy/
+- type: WellKnown
+  url: well-known/restor3d-well-known.yml
+- type: MCPServer
+  url: mcp/restor3d-mcp.yml
+- type: Authentication
+  url: authentication/restor3d-authentication.yml
+- type: OAuthScopes
+  url: scopes/restor3d-scopes.yml
+- type: Conformance
+  url: conformance/restor3d-conformance.yml
+- type: DomainSecurity
+  url: security/restor3d-domain-security.yml
+- type: Plans
+  url: plans/restor3d-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/restor3d-rate-limits.yml
+- type: LLMsTxt
+  url: llms/restor3d-llms.txt
+x-enrichment:
+  date: '2026-08-26'
+  status: enriched
+  artifacts_added: 11
+  pass: local-v1

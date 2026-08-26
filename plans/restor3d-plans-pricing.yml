@@ -1,0 +1,20 @@
+generated: '2026-08-26'
+method: searched
+source: >-
+  Searched www.restor3d.com in full on 2026-08-26 - homepage, /healthcare-professionals/,
+  /patients/, /patients/solutions/, /company/, /contact-us/ and the sitemap at
+  https://www.restor3d.com/sitemap.xml (HTTP 200). There is no /pricing page, no plans page and no
+  self-serve purchase path anywhere on the site.
+api: restor3d Website Content API (WordPress REST + MCP)
+plan_count: 0
+plans: []
+note: >-
+  restor3d sells FDA-regulated implantable medical devices to hospitals and surgeons through a
+  direct sales and distributor motion; implant and instrumentation pricing is contracted per health
+  system and is never published. There is no API product, therefore no API pricing, no free tier
+  and no metered plan. The only machine-readable surface (the corporate WordPress REST API and its
+  MCP endpoint) is incidental infrastructure with no commercial terms attached. plan_count: 0 is an
+  accurate published-zero, not a gap in this pass.
+commercial_contacts:
+- https://www.restor3d.com/contact-us/
+- https://www.restor3d.com/find-a-doctor

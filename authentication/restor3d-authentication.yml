@@ -1,0 +1,58 @@
+generated: '2026-08-26'
+method: probed
+source: >-
+  https://www.restor3d.com/.well-known/oauth-authorization-server (HTTP 200),
+  https://www.restor3d.com/.well-known/oauth-protected-resource (HTTP 200) and the
+  `authentication` block of https://www.restor3d.com/wp-json/ (HTTP 200), all fetched 2026-08-26.
+  Derived from no OpenAPI - restor3d publishes none.
+api: restor3d Website Content API (WordPress REST + MCP)
+summary: >-
+  restor3d publishes no developer authentication documentation of any kind. Everything below was
+  read off machine-readable metadata its website serves, not off a docs page. Anonymous read
+  access is available on the public WordPress REST content routes; every write route and both MCP
+  servers are gated.
+schemes:
+- id: oauth2_mcp
+  type: oauth2
+  flow: authorization_code
+  applies_to: https://www.restor3d.com/wp-json/mcp/mcp-oauth-server
+  issuer: https://www.restor3d.com
+  authorization_endpoint: https://www.restor3d.com/oauth/authorize
+  token_endpoint: https://www.restor3d.com/oauth/token
+  revocation_endpoint: https://www.restor3d.com/oauth/revoke
+  response_types_supported:
+  - code
+  grant_types_supported:
+  - authorization_code
+  - refresh_token
+  pkce:
+    required_methods:
+    - S256
+  token_endpoint_auth_methods_supported:
+  - none
+  client_registration: >-
+    client_id_metadata_document_supported = true - clients are identified by a URL that resolves
+    to a client metadata document (the emerging CIMD pattern) rather than by pre-registration.
+  scopes:
+  - mcp
+  bearer_methods_supported:
+  - header
+- id: application_passwords
+  type: http
+  scheme: basic
+  applies_to: https://www.restor3d.com/wp-json/wp/v2/*
+  note: >-
+    WordPress Application Passwords are advertised in the REST index at
+    https://www.restor3d.com/wp-json/ with authorization endpoint
+    https://www.restor3d.com/wp-admin/authorize-application.php. Issuance requires an existing
+    WordPress account on the site; there is no public sign-up.
+- id: anonymous
+  type: none
+  applies_to: public GET routes under https://www.restor3d.com/wp-json/wp/v2/
+  note: >-
+    Read access to published content types (pages, posts, event, resource, procedure,
+    product-family, product-category, asset-type, content-type, module) is unauthenticated.
+gaps:
+- No authentication documentation is published anywhere on restor3d.com.
+- No API key programme, no developer sign-up, no partner credential flow.
+- No OpenID Connect - /.well-known/openid-configuration returns 404.

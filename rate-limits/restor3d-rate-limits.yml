@@ -1,0 +1,20 @@
+generated: '2026-08-26'
+method: searched
+source: >-
+  Searched www.restor3d.com for any published limits on 2026-08-26 and found none; confirmed by
+  live unauthenticated requests to https://www.restor3d.com/wp-json/ (HTTP 200), which returned no
+  RateLimit-*, X-RateLimit-* or Retry-After headers.
+api: restor3d Website Content API (WordPress REST + MCP)
+limit_count: 0
+limits: []
+response_headers: []
+exhaustion_status: null
+note: >-
+  restor3d publishes no rate limits, because it publishes no API programme. Observed behaviour on
+  the incidental WordPress surface: no rate-limit headers are returned on a 200, an edge WAF
+  (Cloudflare) answers HTTP 403 with an "Attention Required" interstitial to non-browser
+  User-Agents on /wp-json/* paths, and https://www.restor3d.com/robots.txt (HTTP 200) publishes
+  "Crawl-delay: 10" for all agents - the only throttling signal of any kind the company emits. A
+  WP Engine plugin route /wp-json/wpe/cache-plugin/v1/rate_limit_status exists in the REST index
+  but is authenticated and undocumented, so no limit values are asserted from it.
+crawl_delay_seconds: 10

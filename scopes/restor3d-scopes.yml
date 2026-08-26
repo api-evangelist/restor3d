@@ -1,0 +1,19 @@
+generated: '2026-08-26'
+method: probed
+source: >-
+  scopes_supported in https://www.restor3d.com/.well-known/oauth-authorization-server (HTTP 200)
+  and https://www.restor3d.com/.well-known/oauth-protected-resource (HTTP 200), fetched
+  2026-08-26. No scope reference page exists to enrich from - restor3d publishes no developer
+  documentation.
+api: restor3d Website Content API (WordPress REST + MCP)
+docs: null
+scope_count: 1
+scopes:
+- name: mcp
+  description: >-
+    The single scope the authorization server advertises. It gates the Model Context Protocol
+    resource https://www.restor3d.com/wp-json/mcp/mcp-oauth-server. The metadata documents publish
+    no finer-grained scopes and no per-tool or per-content-type scoping; what a granted `mcp` token
+    is actually permitted to do cannot be determined without an authenticated session, and is not
+    asserted here.
+  resource: https://www.restor3d.com/wp-json/mcp/mcp-oauth-server
