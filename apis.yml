@@ -13,6 +13,17 @@ description: >-
   OpenAPI. The only machine-readable surface it serves is its own corporate WordPress site,
   which exposes the standard WordPress REST API and an OAuth-protected Model Context Protocol
   endpoint over site content.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: false
+  label: Hosted service · you call their endpoint
+  confidence: medium
+  source:
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 image: https://www.restor3d.com/wp-content/uploads/2024/12/Main-Brand-Logo.svg
 url: https://raw.githubusercontent.com/api-evangelist/restor3d/refs/heads/main/apis.yml
 x-type: company
