@@ -1,27 +1,25 @@
 generated: '2026-08-26'
 method: probed
-source: >-
-  Direct unauthenticated GETs of /.well-known/* on www.restor3d.com, 2026-08-26, with a browser
-  User-Agent. restor3d serves no other host: api./app.restor3d.com resolve to Google-hosted
-  (ghs.googlehosted.com) redirectors and developer./developers./docs./portal.restor3d.com all
-  resolve to the same Google Cloud front-end (34.117.169.37) with no developer surface behind it.
-notes: >-
-  Two of the probed paths return real documents. Both are OAuth 2.0 metadata documents emitted by
-  the WordPress MCP/OAuth plugin stack running the corporate site, and together they describe an
-  OAuth 2.1-style authorization server (PKCE S256, public clients, client-ID metadata documents)
-  guarding the Model Context Protocol endpoint at /wp-json/mcp/mcp-oauth-server. Everything else
-  404s. No security.txt is served, so no SecurityTxt pointer is emitted.
+source: 'Direct unauthenticated GETs of /.well-known/* on www.restor3d.com, 2026-08-26, with a browser
+  User-Agent. restor3d serves no other host: api./app.restor3d.com resolve to Google-hosted (ghs.googlehosted.com)
+  redirectors and developer./developers./docs./portal.restor3d.com all resolve to the same Google Cloud
+  front-end (34.117.169.37) with no developer surface behind it.'
+notes: Two of the probed paths return real documents. Both are OAuth 2.0 metadata documents emitted by
+  the WordPress MCP/OAuth plugin stack running the corporate site, and together they describe an OAuth
+  2.1-style authorization server (PKCE S256, public clients, client-ID metadata documents) guarding the
+  Model Context Protocol endpoint at /wp-json/mcp/mcp-oauth-server. Everything else 404s. No security.txt
+  is served, so no SecurityTxt pointer is emitted.
 hosts:
 - host: www.restor3d.com
   documents:
   - path: /.well-known/oauth-authorization-server
     status: 200
     content_type: application/json
-    file: well-known/restor3d-oauth-authorization-server.json
+    file: restor3d-oauth-authorization-server.json
   - path: /.well-known/oauth-protected-resource
     status: 200
     content_type: application/json
-    file: well-known/restor3d-oauth-protected-resource.json
+    file: restor3d-oauth-protected-resource.json
   - path: /.well-known/security.txt
     status: 404
   - path: /.well-known/openid-configuration
