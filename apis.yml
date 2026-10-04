@@ -82,6 +82,9 @@ apis:
     url: authentication/restor3d-authentication.yml
   - type: OAuthScopes
     url: scopes/restor3d-scopes.yml
+  x-surface: platform-generated
+  x-platform: wordpress
+  x-platform-surface: rest
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
